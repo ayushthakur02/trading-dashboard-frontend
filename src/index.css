@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-on-surface font-body;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Tabular numbers for all price/data display */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-surface border border-border;
+  }
+
+  .panel-header {
+    @apply px-3 py-2 border-b border-border flex items-center justify-between;
+  }
+
+  .panel-title {
+    @apply font-headline text-xs font-semibold tracking-widest text-on-surface-muted uppercase;
+  }
+
+  .btn-ghost {
+    @apply border border-border text-on-surface-muted hover:border-primary hover:text-primary
+           text-xs font-body px-3 py-1 rounded transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply bg-primary-container text-white text-xs font-body font-medium px-3 py-1 rounded
+           hover:opacity-90 transition-opacity duration-150;
+  }
+
+  /* Flash animations for price changes */
+  @keyframes flash-gain {
+    0%   { background-color: rgba(19, 255, 67, 0.2); }
+    100% { background-color: transparent; }
+  }
+  @keyframes flash-loss {
+    0%   { background-color: rgba(255, 83, 82, 0.2); }
+    100% { background-color: transparent; }
+  }
+
+  .flash-gain { animation: flash-gain 300ms ease-out forwards; }
+  .flash-loss { animation: flash-loss 300ms ease-out forwards; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { @apply bg-surface-highest rounded-full; }
