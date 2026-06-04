@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { MarketProvider } from './context/MarketContext';
+import { AlertProvider } from './context/AlertContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { AlertToasts } from './components/Alerts/AlertToasts';
 import { Layout } from './components/Layout/Layout';
 import { Login } from './pages/Login/Login';
 import { Dashboard } from './pages/Dashboard/Dashboard';
@@ -19,8 +21,11 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <MarketProvider>
-                  <AppInit />
-                  <Layout />
+                  <AlertProvider>
+                    <AppInit />
+                    <AlertToasts />
+                    <Layout />
+                  </AlertProvider>
                 </MarketProvider>
               </ProtectedRoute>
             }

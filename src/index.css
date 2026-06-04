@@ -55,6 +55,12 @@
 
   .flash-gain { animation: flash-gain 300ms ease-out forwards; }
   .flash-loss { animation: flash-loss 300ms ease-out forwards; }
+
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateX(16px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .animate-slide-in { animation: slide-in 200ms ease-out forwards; }
 }
 
 /* Scrollbar */
