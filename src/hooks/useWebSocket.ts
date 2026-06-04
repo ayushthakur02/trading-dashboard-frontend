@@ -2,8 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useMarket } from '../context/MarketContext';
 import type { WsOutgoingMessage } from '../types/market';
 
-const WS_URL = `ws://${window.location.host}/ws`;
 const SYMBOLS = ['AAPL', 'TSLA', 'MSFT', 'GOOGL', 'NVDA', 'AMZN', 'BTC-USD', 'ETH-USD'];
+
+function getWsUrl(): string {
+  const token = localStorage.getItem('td_token') ?? '';
+  return `ws://${window.location.host}/ws?token=${encodeURIComponent(token)}`;
+}
 
 export function useWebSocket() {
   const { dispatch } = useMarket();
@@ -12,7 +16,7 @@ export function useWebSocket() {
 
   useEffect(() => {
     function connect() {
-      const socket = new WebSocket(WS_URL);
+      const socket = new WebSocket(getWsUrl());
       ws.current = socket;
 
       socket.onopen = () => {
